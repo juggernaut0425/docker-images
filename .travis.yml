@@ -11,7 +11,7 @@ install:
     - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin "$DOCKER_REGISTRY"
     - sh mustache_json_param.sh | mustache - maven_settings.mustache > settings.xml
 script:
-    - docker build --tag ${DOCKER_REGISTRY}/${REPO_NAME_TAG} ./
+    - docker build --build-arg SOURCE_MAVEN_TAG=3.5-jdk-8 --tag ${DOCKER_REGISTRY}/${REPO_NAME_TAG} ./
     - docker push ${DOCKER_REGISTRY}/${REPO_NAME_TAG} ./
 env:
     global:
