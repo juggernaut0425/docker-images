@@ -9,7 +9,7 @@ cache:
 install:
     - npm install -g mustache
     - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin "$DOCKER_REGISTRY"
-    - echo "{\"MAVEN_REGISTRY_PASSWORD\"\: \"$MAVEN_REGISTRY_PASSWORD\"}"| mustache - maven_settings.mustache > settings.xml
+    - echo "{\"MAVEN_REGISTRY_PASSWORD\"\":\" \"$MAVEN_REGISTRY_PASSWORD\"}"| mustache - maven_settings.mustache > settings.xml
 script:
     - docker build --tag ${DOCKER_REGISTRY}/${REPO_NAME_TAG} ./
     - docker push ${DOCKER_REGISTRY}/${REPO_NAME_TAG} ./
