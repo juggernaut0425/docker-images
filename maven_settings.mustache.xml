@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<settings xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.1.0 http://maven.apache.org/xsd/settings-1.1.0.xsd" xmlns="http://maven.apache.org/SETTINGS/1.1.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+    <!-- 使用阿里的库作为中央库，提高下载速度-->
+    <mirrors>
+        <mirror>
+            <id>aliyun</id>
+            <name>aliyun Central</name>
+            <url>http://maven.aliyun.com/nexus/content/groups/public/</url>
+            <mirrorOf>central</mirrorOf>
+        </mirror>
+    </mirrors>
+    <localRepository>/usr/share/maven/ref/repository</localRepository>
+    <servers>
+        <server>
+            <username>manqian_dev</username>
+            <password>{{MAVEN_REGISTRY_PASSWORD}}</password>
+            <id>manqian_maven_private</id>
+        </server>
+        <server>
+            <username>manqian_dev</username>
+            <password>{{MAVEN_REGISTRY_PASSWORD}}</password>
+            <id>artifactory-release</id>
+        </server>
+        <server>
+            <username>manqian_dev</username>
+            <password>{{MAVEN_REGISTRY_PASSWORD}}</password>
+            <id>artifactory-snapshots</id>
+        </server>
+    </servers>
+    <profiles>
+        <profile>
+            <repositories>
+                <repository>
+                    <id>manqian_maven_private</id>
+                    <name>manqian_maven_private</name>
+                    <url>http://artifactory.manqian.cn/artifactory/manqian-maven-private</url>
+                </repository>
+            </repositories>
+            <pluginRepositories>
+                <pluginRepository>
+                    <id>manqian_maven_private</id>
+                    <name>manqian_maven_private</name>
+                    <url>http://artifactory.manqian.cn/artifactory/manqian-maven-private</url>
+                </pluginRepository>
+            </pluginRepositories>
+            <id>artifactory</id>
+        </profile>
+    </profiles>
+    <activeProfiles>
+        <activeProfile>artifactory</activeProfile>
+    </activeProfiles>
+</settings>

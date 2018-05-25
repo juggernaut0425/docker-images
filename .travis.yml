@@ -1,0 +1,21 @@
+language: node_js
+node_js: stable
+cache:
+  directories:
+    - "node_modules"
+sudo: enabled
+services:
+    - docker
+cache:
+  directories:
+    - node_modules
+install:
+    - npm install -g mustache
+    - echo '{MAVEN_REGISTRY_PASSWORD: "$MAVEN_REGISTRY_PASSWORD"}'| mustache - maven_settings.mustache > settings.xml
+    - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin "$DOCKER_REGISTRY"
+script:
+    - docker build --tag ${DOCKER_REGISTRY}/${REPO_NAME_TAG} ./
+    - docker push ${DOCKER_REGISTRY}/${REPO_NAME_TAG} ./
+env:
+    global:
+        - REPO_NAME_TAG: tiggerlee/maven:3.5-jdk-8
