@@ -8,7 +8,7 @@ cache:
     - node_modules
 install:
     - npm install -g mustache
-    - echo '{MAVEN_REGISTRY_PASSWORD: "$MAVEN_REGISTRY_PASSWORD"}'| mustache - maven_settings.mustache > settings.xml
+    - echo "{MAVEN_REGISTRY_PASSWORD: "$MAVEN_REGISTRY_PASSWORD"}"| mustache - maven_settings.mustache > settings.xml
     - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin "$DOCKER_REGISTRY"
 script:
     - docker build --tag ${DOCKER_REGISTRY}/${REPO_NAME_TAG} ./
